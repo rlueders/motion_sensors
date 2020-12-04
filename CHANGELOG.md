@@ -1,3 +1,7 @@
+## 0.0.5
+
+* Added Quanternion and Euler conversions
+
 ## 0.0.4
 
 * add screen orientation
