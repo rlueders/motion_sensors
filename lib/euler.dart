@@ -11,7 +11,7 @@ class Euler{
   double yaw; 
 
 
-  Euler toEulaer(Quanternion q){
+  void toEulaer(Quanternion q){
 
     roll = atan2(sinr_cosp(q), cosr_cosp(q));
 
@@ -21,8 +21,6 @@ class Euler{
         pitch = asin(sinp(q));
 
   yaw = atan2(siny_cosp(q), cosy_cosp(q));      
-
-
 
   }
 
