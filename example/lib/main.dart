@@ -21,6 +21,7 @@ class _MyAppState extends State<MyApp> {
   Vector3 _orientation = Vector3.zero();
   Vector3 _absoluteOrientation = Vector3.zero();
   double _screenOrientation = 0;
+  Quanternion qLast;
 
   int _groupValue = 0;
 
@@ -57,14 +58,34 @@ class _MyAppState extends State<MyApp> {
       }
     });
     motionSensors.absoluteOrientation.listen((AbsoluteOrientationEvent event) {
-      Quanternion q = Quanternion();
-      q.toQuanternion(event.yaw, event.pitch, event.roll);
+    
+     
+
+    // if(qLast != null){
+       Quanternion qCurr =Quanternion();
+       qCurr.toQuanternion(event.yaw, event.pitch, event.roll);
+       qCurr.normalise();
+
+       Quanternion qZero = Quanternion();
+       qZero.toQuanternion(0,0,0);
+       qZero.normalise();
+
+      Quanternion qFinal = Quanternion.multiply(qZero, qCurr);
+      qFinal.normalise();
       Euler e = Euler();
-      e.toEulaer(q);
+      e.toEulaer(qFinal);
       setState(() {
         _orientation.setValues(event.yaw, event.pitch, event.roll);
         _absoluteOrientation.setValues(e.yaw, e.pitch, e.roll);
       });
+
+    // }
+      
+
+     
+      // qLast = Quanternion();
+      //  qLast.toQuanternion(event.yaw, event.pitch, event.roll);
+
     });
     motionSensors.screenOrientation.listen((ScreenOrientationEvent event) {
       setState(() {
@@ -164,7 +185,7 @@ class _MyAppState extends State<MyApp> {
                 Text('${degrees(_orientation.z).toStringAsFixed(4)}'),
               ],
             ),
-            Text('Absolute Orientation'),
+            Text('Quaternion Orientation'),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
