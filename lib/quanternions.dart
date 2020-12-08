@@ -14,6 +14,13 @@ class Quanternion {
     w /= n;
 }
 
+ void conjugate() {
+    x = -x;
+    y = -y;
+    z = -z;
+    w = w;
+  }
+
   void toQuanternion(double yaw, double pitch, double roll) {
     w = cr(roll) * cp(pitch) * cy(yaw) + sr(roll) * sp(pitch) * sy(yaw);
     x = sr(roll) * cp(pitch) * cy(yaw) - cr(roll) * sp(pitch) * sy(yaw);
