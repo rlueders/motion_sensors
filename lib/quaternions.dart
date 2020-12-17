@@ -9,7 +9,7 @@ class Quaternion {
   num attitude = 0; 
   num bank = 0;
 
-  Quaternion(double yaw, double pitch, double roll) {
+  void setEuler(double yaw, double pitch, double roll) {
     final halfYaw = yaw * 0.5;
     final halfPitch = pitch * 0.5;
     final halfRoll = roll * 0.5;
