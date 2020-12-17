@@ -3,13 +3,13 @@ import 'dart:math';
 import 'dart:typed_data';
 
 class Quaternion {
-   Float32List _qStorage;
+  Float32List _qStorage = Float32List(4);
 
   num heading = 0; 
   num attitude = 0; 
   num bank = 0;
 
-  void setEuler(double yaw, double pitch, double roll) {
+  Quaternion(double yaw, double pitch, double roll) {
     final halfYaw = yaw * 0.5;
     final halfPitch = pitch * 0.5;
     final halfRoll = roll * 0.5;
