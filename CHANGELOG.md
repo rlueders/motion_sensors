@@ -1,3 +1,7 @@
+## 0.0.9
+
+* Reversed pitch and yaw on IOS - I had missed this change when reverting the original author's right-hand rule changes
+
 ## 0.0.5
 
 * Added Quanternion and Euler conversions
