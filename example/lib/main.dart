@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:motion_sensors/euler.dart';
-import 'package:motion_sensors/quanternions.dart';
 import 'package:vector_math/vector_math_64.dart' hide Colors;
 import 'package:motion_sensors/motion_sensors.dart';
 
@@ -21,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   Vector3 _orientation = Vector3.zero();
   Vector3 _absoluteOrientation = Vector3.zero();
   double _screenOrientation = 0;
-  Quanternion qLast;
+
 
   int _groupValue = 0;
 
@@ -52,7 +50,7 @@ class _MyAppState extends State<MyApp> {
       if (available) {
         motionSensors.orientation.listen((OrientationEvent event) {
           setState(() {
-            // _orientation.setValues(event.yaw, event.pitch, event.roll);
+            _orientation.setValues(event.yaw, event.pitch, event.roll);
           });
         });
       }
@@ -61,22 +59,9 @@ class _MyAppState extends State<MyApp> {
     
      
 
-    // if(qLast != null){
-       Quanternion qCurr =Quanternion();
-       qCurr.toQuanternion(event.yaw, event.pitch, event.roll);
-       qCurr.normalise();
-
-       Quanternion qZero = Quanternion();
-       qZero.toQuanternion(0,0,0);
-       qZero.normalise();
-
-      Quanternion qFinal = Quanternion.multiply(qZero, qCurr);
-      qFinal.normalise();
-      Euler e = Euler();
-      e.toEulaer(qFinal);
       setState(() {
         _orientation.setValues(event.yaw, event.pitch, event.roll);
-        _absoluteOrientation.setValues(e.yaw, e.pitch, e.roll);
+
       });
 
     // }
