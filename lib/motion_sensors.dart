@@ -30,7 +30,7 @@ class AccelerometerEvent {
   ///
   /// When the device is held upright facing the user, positive values mean the
   /// device is moving to the right and negative mean it is moving to the left.
-  final double x;
+ final double x;
 
   /// Acceleration force along the y axis (including gravity) measured in m/s^2.
   ///
