@@ -23,3 +23,6 @@ motionSensors.magnetometer.listen((MagnetometerEvent event) {
 
 0.1.0
 Added null safety
+
+0.2.0
+upgrade dependancies 
