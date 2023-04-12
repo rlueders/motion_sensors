@@ -152,7 +152,7 @@ class StreamHandlerImpl(private val sensorManager: SensorManager, sensorType: In
   }
 
   override fun onSensorChanged(event: SensorEvent?) {
-    val sensorValues = listOf(event!!.values[0], event.values[1], event.values[2])
+    val sensorValues = listOf(event!!.values[0], event.values[1], event.values[2], event.timestamp.toDouble())
     eventSink?.success(sensorValues)
   }
 

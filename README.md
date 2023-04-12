@@ -26,3 +26,6 @@ Added null safety
 
 0.2.0
 upgrade dependancies 
+
+1.2.0
+Addging event timestamps
