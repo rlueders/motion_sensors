@@ -61,6 +61,7 @@ class _MyAppState extends State<MyApp> {
 
       setState(() {
         _orientation.setValues(event.yaw, event.pitch, event.roll);
+        print(event.timestamp);
 
       });
 
