@@ -31,3 +31,5 @@ upgrade dependancies
 Addging event timestamps
 1.2.1
 Adding timestamp to absolute orientation
+1.2.2
+Converting event timestamps to system time
