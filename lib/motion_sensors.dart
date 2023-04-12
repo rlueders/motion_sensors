@@ -171,11 +171,12 @@ class OrientationEvent {
 }
 
 class AbsoluteOrientationEvent {
-  AbsoluteOrientationEvent(this.yaw, this.pitch, this.roll);
+  AbsoluteOrientationEvent(this.yaw, this.pitch, this.roll, this.timestamp);
   AbsoluteOrientationEvent.fromList(List<double> list)
       : yaw = list[0],
         pitch = list[1],
-        roll = list[2];
+        roll = list[2],
+        timestamp = list[3];
 
   /// The yaw of the device in radians.
   final double yaw;
@@ -185,6 +186,9 @@ class AbsoluteOrientationEvent {
 
   /// The roll of the device in radians.
   final double roll;
+
+  
+  final double timestamp;
   @override
   String toString() => '[Orientation (yaw: $yaw, pitch: $pitch, roll: $roll)]';
 }

@@ -29,3 +29,5 @@ upgrade dependancies
 
 1.2.0
 Addging event timestamps
+1.2.1
+Adding timestamp to absolute orientation
