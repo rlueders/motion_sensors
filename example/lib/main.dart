@@ -16,8 +16,8 @@ class _MyAppState extends State<MyApp> {
   Vector3 _gyroscope = Vector3.zero();
   Vector3 _magnetometer = Vector3.zero();
   Vector3 _userAaccelerometer = Vector3.zero();
-  Vector3 _orientation = Vector3.zero();
-  Vector3 _absoluteOrientation = Vector3.zero();
+  Vector3 _orientation = Vector3.zero(); //magnometer
+  Vector3 _absoluteOrientation = Vector3.zero(); // rotation vector sensor
   double _screenOrientation = 0;
 
 
@@ -46,21 +46,18 @@ class _MyAppState extends State<MyApp> {
         _magnetometer.setValues(event.x, event.y, event.z);
       });
     });
-    motionSensors.isOrientationAvailable().then((available) {
-      if (available) {
+    // motionSensors.isOrientationAvailable().then((available) {
+      // if (available) {
         motionSensors.orientation.listen((OrientationEvent event) {
           setState(() {
             _orientation.setValues(event.yaw, event.pitch, event.roll);
           });
         });
-      }
-    });
-    motionSensors.absoluteOrientation.listen((AbsoluteOrientationEvent event) {
-    
-     
-
+      // }
+    // });
+    motionSensors.absoluteOrientation.listen((AbsoluteOrientationEvent event) {     
       setState(() {
-        _orientation.setValues(event.yaw, event.pitch, event.roll);
+        _absoluteOrientation.setValues(event.yaw, event.pitch, event.roll);
         print(event.timestamp);
 
       });
@@ -162,7 +159,7 @@ class _MyAppState extends State<MyApp> {
                 Text('${_userAaccelerometer.z.toStringAsFixed(4)}'),
               ],
             ),
-            Text('Orientation'),
+            Text('Orientation (Magnomter based)'),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
@@ -171,7 +168,7 @@ class _MyAppState extends State<MyApp> {
                 Text('${degrees(_orientation.z).toStringAsFixed(4)}'),
               ],
             ),
-            Text('Quaternion Orientation'),
+            Text('Absolute Orientation (Rotation Vector Sensor)'),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
