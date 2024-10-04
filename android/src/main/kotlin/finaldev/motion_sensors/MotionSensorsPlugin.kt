@@ -135,7 +135,7 @@ class StreamHandlerImpl(private val sensorManager: SensorManager, sensorType: In
   private val sensor = sensorManager.getDefaultSensor(sensorType)
   private var eventSink: EventChannel.EventSink? = null
   private var eventCount = 0; 
-  private var timeDiff = 0.0
+  private var timeDiff = 0
 
   override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
     if (sensor != null) {
@@ -159,11 +159,11 @@ class StreamHandlerImpl(private val sensorManager: SensorManager, sensorType: In
 
         var  nanoTime = event!!.timestamp;
 
-       timeDiff = (miliTime - nanoTime / 1000000).toDouble();
+        var timeDiff = miliTime - nanoTime / 1000000;
         eventCount++;
     }
 
-    val sensorValues = listOf(event!!.values[0], event.values[1], event.values[2], ((event.timestamp/ 1000000) + timeDiff).toDouble())
+    val sensorValues = listOf(event!!.values[0], event.values[1], event.values[2], event.timestamp.toDouble()/ 1000000 + timeDiff)
     eventSink?.success(sensorValues)
   }
 
@@ -182,7 +182,7 @@ class RotationVectorStreamHandler(private val sensorManager: SensorManager, sens
   private var eventSink: EventChannel.EventSink? = null
 
   private var eventCount = 0; 
-  private var timeDiff = 0.0
+  private var timeDiff = 0
 
   override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
     if (sensor != null) {
@@ -206,7 +206,7 @@ class RotationVectorStreamHandler(private val sensorManager: SensorManager, sens
 
         var  nanoTime = event!!.timestamp;
 
-        timeDiff = (miliTime - nanoTime / 1000000).toDouble()
+        var timeDiff = miliTime - nanoTime / 1000000;
         eventCount++;
     }
     var matrix = FloatArray(9)
