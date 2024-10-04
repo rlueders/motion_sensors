@@ -20,12 +20,11 @@ const EventChannel _screenOrientationChannel = EventChannel('motion_sensors/scre
 /// a particular direction.
 class AccelerometerEvent {
   /// Contructs an instance with the given [x], [y], and [z] values.
-  AccelerometerEvent(this.x, this.y, this.z, this.timestamp);
+  AccelerometerEvent(this.x, this.y, this.z);
   AccelerometerEvent.fromList(List<double> list)
       : x = list[0],
         y = list[1],
-        z = list[2],
-        timestamp = list[3];
+        z = list[2];
 
   /// Acceleration force along the x axis (including gravity) measured in m/s^2.
   ///
@@ -47,12 +46,8 @@ class AccelerometerEvent {
   /// towards the user and negative mean it is moving away from them.
   final double z;
 
-  /// The time in milliseconds at which the event happened.
-  /// The timestamp is the amount of time in milliseconds since the device booted.
-  final double timestamp;
-
   @override
-  String toString() => '[AccelerometerEvent (x: $x, y: $y, z: $z, timestamp: $timestamp)]';
+  String toString() => '[AccelerometerEvent (x: $x, y: $y, z: $z)]';
 }
 
 class MagnetometerEvent {
@@ -73,12 +68,11 @@ class MagnetometerEvent {
 /// the device in 3D space.
 class GyroscopeEvent {
   /// Contructs an instance with the given [x], [y], and [z] values.
-  GyroscopeEvent(this.x, this.y, this.z, this.timestamp);
+  GyroscopeEvent(this.x, this.y, this.z);
   GyroscopeEvent.fromList(List<double> list)
       : x = list[0],
         y = list[1],
-        z = list[2],
-        timestamp = list[3];
+        z = list[2];
 
   /// Rate of rotation around the x axis measured in rad/s.
   ///
@@ -102,10 +96,6 @@ class GyroscopeEvent {
   /// on.
   final double z;
 
-    /// The time in milliseconds at which the event happened.
-  /// The timestamp is the amount of time in milliseconds since the device booted.
-  final double timestamp;
-
   @override
   String toString() => '[GyroscopeEvent (x: $x, y: $y, z: $z)]';
 }
@@ -115,12 +105,11 @@ class GyroscopeEvent {
 /// [AccelerometerEvent], this event does not include the effects of gravity.
 class UserAccelerometerEvent {
   /// Contructs an instance with the given [x], [y], and [z] values.
-  UserAccelerometerEvent(this.x, this.y, this.z, this.timestamp);
+  UserAccelerometerEvent(this.x, this.y, this.z);
   UserAccelerometerEvent.fromList(List<double> list)
       : x = list[0],
         y = list[1],
-        z = list[2],
-        timestamp = list[3];
+        z = list[2];
 
   /// Acceleration force along the x axis (excluding gravity) measured in m/s^2.
   ///
@@ -141,11 +130,6 @@ class UserAccelerometerEvent {
   /// upright and facing the user, positive values mean the device is moving
   /// towards the user and negative mean it is moving away from them.
   final double z;
-
-  /// The time in milliseconds at which the event happened.
-  /// For Android, the timestamp is the amount of time in milliseconds since the device booted.
-  /// For iOS, the timestamp is the amount of time in milliseconds since 1970.
-  final double timestamp;
 
   @override
   String toString() => '[UserAccelerometerEvent (x: $x, y: $y, z: $z)]';
