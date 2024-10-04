@@ -42,6 +42,3 @@ Absolute Orientation now returns data from TYPE_ROTATION_VECTOR sensor
 
 1.3.1
 Fixing TYPE_ORIENTATION constant value
-
-1.3.2
-Adding android doc reemended method for obtaining orientation (weill be ruturned when listening to Magnetic Field)

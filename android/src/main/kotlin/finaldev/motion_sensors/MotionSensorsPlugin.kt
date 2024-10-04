@@ -17,10 +17,6 @@ import io.flutter.plugin.common.PluginRegistry.Registrar
 
 // translate from https://github.com/flutter/plugins/tree/master/packages/sensors
 /** MotionSensorsPlugin */
-
-var accelerometerReading = floatArrayOf()
-var magnetometerReading = floatArrayOf()
-
 public class MotionSensorsPlugin : FlutterPlugin, MethodChannel.MethodCallHandler {
   private val METHOD_CHANNEL_NAME = "motion_sensors/method"
   private val ACCELEROMETER_CHANNEL_NAME = "motion_sensors/accelerometer"
@@ -167,35 +163,8 @@ class StreamHandlerImpl(private val sensorManager: SensorManager, sensorType: In
         eventCount++;
     }
 
-     when(event!!.sensor.type) {
-        Sensor.TYPE_ACCELEROMETER -> {
-            accelerometerReading = floatArrayOf(event.values[0], event.values[1], event.values[2])
-            val sensorValues = listOf(event!!.values[0], event.values[1], event.values[2], ((event.timestamp/ 1000000) + timeDiff).toDouble())
-            eventSink?.success(sensorValues)
-        }
-        Sensor.TYPE_LINEAR_ACCELERATION -> {            
-            val sensorValues = listOf(event!!.values[0], event.values[1], event.values[2], ((event.timestamp/ 1000000) + timeDiff).toDouble())
-            eventSink?.success(sensorValues)
-        }
-        Sensor.TYPE_MAGNETIC_FIELD -> {
-            magnetometerReading = floatArrayOf(event.values[0], event.values[1], event.values[2])
-            val rotationMatrix = FloatArray(9)
-            if (magnetometerReading.isEmpty() || accelerometerReading.isEmpty()) {
-
-            }else{
-              SensorManager.getRotationMatrix(rotationMatrix, FloatArray(9), accelerometerReading, magnetometerReading)
-              val orientationAngles = FloatArray(3)
-              SensorManager.getOrientation(rotationMatrix, orientationAngles) //always returns the same values that are provided to it. why?   
-
-              val sensorValues = listOf(orientationAngles[0]* 57.2958, orientationAngles[1] * 57.2958, orientationAngles[2]* 57.2958, ((event.timestamp/ 1000000) + timeDiff).toDouble())
-              eventSink?.success(sensorValues)            
-            }
-            
-        }
- 
-    }
-
-
+    val sensorValues = listOf(event!!.values[0], event.values[1], event.values[2], ((event.timestamp/ 1000000) + timeDiff).toDouble())
+    eventSink?.success(sensorValues)
   }
 
   fun setUpdateInterval(interval: Int) {
