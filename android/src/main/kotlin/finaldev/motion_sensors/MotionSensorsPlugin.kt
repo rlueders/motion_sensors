@@ -134,8 +134,6 @@ class StreamHandlerImpl(private val sensorManager: SensorManager, sensorType: In
         EventChannel.StreamHandler, SensorEventListener {
   private val sensor = sensorManager.getDefaultSensor(sensorType)
   private var eventSink: EventChannel.EventSink? = null
-  private var eventCount = 0; 
-  private var timeDiff = 0
 
   override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
     if (sensor != null) {
@@ -154,16 +152,7 @@ class StreamHandlerImpl(private val sensorManager: SensorManager, sensorType: In
   }
 
   override fun onSensorChanged(event: SensorEvent?) {
-    if (eventCount == 0) {
-        var  miliTime = System.currentTimeMillis();
-
-        var  nanoTime = event!!.timestamp;
-
-        var timeDiff = miliTime - nanoTime / 1000000;
-        eventCount++;
-    }
-
-    val sensorValues = listOf(event!!.values[0], event.values[1], event.values[2], event.timestamp.toDouble()/ 1000000 + timeDiff)
+    val sensorValues = listOf(event!!.values[0], event.values[1], event.values[2], event.timestamp.toDouble())
     eventSink?.success(sensorValues)
   }
 
@@ -181,9 +170,6 @@ class RotationVectorStreamHandler(private val sensorManager: SensorManager, sens
   private val sensor = sensorManager.getDefaultSensor(sensorType)
   private var eventSink: EventChannel.EventSink? = null
 
-  private var eventCount = 0; 
-  private var timeDiff = 0
-
   override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
     if (sensor != null) {
       eventSink = events
@@ -201,19 +187,11 @@ class RotationVectorStreamHandler(private val sensorManager: SensorManager, sens
   }
 
   override fun onSensorChanged(event: SensorEvent?) {
-    if (eventCount == 0) {
-        var  miliTime = System.currentTimeMillis();
-
-        var  nanoTime = event!!.timestamp;
-
-        var timeDiff = miliTime - nanoTime / 1000000;
-        eventCount++;
-    }
     var matrix = FloatArray(9)
     SensorManager.getRotationMatrixFromVector(matrix, event!!.values)
     var orientation = FloatArray(3)
     SensorManager.getOrientation(matrix, orientation)
-    val sensorValues = listOf(orientation[0], orientation[1], orientation[2], event.timestamp.toDouble()/ 1000000 + timeDiff)
+    val sensorValues = listOf(orientation[0], orientation[1], orientation[2], event.timestamp.toDouble())
     eventSink?.success(sensorValues)
   }
 
