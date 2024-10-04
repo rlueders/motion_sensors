@@ -191,7 +191,7 @@ class RotationVectorStreamHandler(private val sensorManager: SensorManager, sens
     SensorManager.getRotationMatrixFromVector(matrix, event!!.values)
     var orientation = FloatArray(3)
     SensorManager.getOrientation(matrix, orientation)
-    val sensorValues = listOf(orientation[0], orientation[1], orientation[2], event.timestamp.toDouble())
+    val sensorValues = listOf(orientation[0], orientation[1], orientation[2])
     eventSink?.success(sensorValues)
   }
 
