@@ -33,5 +33,3 @@ Addging event timestamps
 Adding timestamp to absolute orientation
 1.2.2
 Converting event timestamps to system time
-1.2.4
-Changing sensor type to TYPE_GEOMAGNETIC_ROTATION_VECTOR

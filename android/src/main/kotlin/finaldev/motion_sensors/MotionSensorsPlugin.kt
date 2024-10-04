@@ -99,7 +99,7 @@ public class MotionSensorsPlugin : FlutterPlugin, MethodChannel.MethodCallHandle
     orientationChannel!!.setStreamHandler(orientationStreamHandler!!)
 
     absoluteOrientationChannel = EventChannel(messenger, ABSOLUTE_ORIENTATION_CHANNEL_NAME)
-    absoluteOrientationStreamHandler = RotationVectorStreamHandler(sensorManager!!, Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR)
+    absoluteOrientationStreamHandler = RotationVectorStreamHandler(sensorManager!!, Sensor.TYPE_ROTATION_VECTOR)
     absoluteOrientationChannel!!.setStreamHandler(absoluteOrientationStreamHandler!!)
 
     screenOrientationChannel = EventChannel(messenger, SCREEN_ORIENTATION_CHANNEL_NAME)
@@ -125,7 +125,7 @@ public class MotionSensorsPlugin : FlutterPlugin, MethodChannel.MethodCallHandle
       Sensor.TYPE_GYROSCOPE -> gyroScopeStreamHandler!!.setUpdateInterval(interval)
       Sensor.TYPE_LINEAR_ACCELERATION -> userAccelerationStreamHandler!!.setUpdateInterval(interval)
       Sensor.TYPE_GAME_ROTATION_VECTOR -> orientationStreamHandler!!.setUpdateInterval(interval)
-      Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR -> absoluteOrientationStreamHandler!!.setUpdateInterval(interval)
+      Sensor.TYPE_ROTATION_VECTOR -> absoluteOrientationStreamHandler!!.setUpdateInterval(interval)
     }
   }
 }
