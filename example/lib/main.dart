@@ -26,36 +26,36 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    motionSensors.gyroscope.listen((GyroscopeEvent event) {
+    motionSensors.gyroscope!.listen((GyroscopeEvent event) {
       setState(() {
         _gyroscope.setValues(event.x, event.y, event.z);
       });
     });
-    motionSensors.accelerometer.listen((AccelerometerEvent event) {
+    motionSensors.accelerometer!.listen((AccelerometerEvent event) {
       setState(() {
         _accelerometer.setValues(event.x, event.y, event.z);
       });
     });
-    motionSensors.userAccelerometer.listen((UserAccelerometerEvent event) {
+    motionSensors.userAccelerometer!.listen((UserAccelerometerEvent event) {
       setState(() {
         _userAaccelerometer.setValues(event.x, event.y, event.z);
       });
     });
-    motionSensors.magnetometer.listen((MagnetometerEvent event) {
+    motionSensors.magnetometer!.listen((MagnetometerEvent event) {
       setState(() {
         _magnetometer.setValues(event.x, event.y, event.z);
       });
     });
     motionSensors.isOrientationAvailable().then((available) {
-      if (available) {
-        motionSensors.orientation.listen((OrientationEvent event) {
+      if (available!) {
+        motionSensors.orientation!.listen((OrientationEvent event) {
           setState(() {
             _orientation.setValues(event.yaw, event.pitch, event.roll);
           });
         });
       }
     });
-    motionSensors.absoluteOrientation.listen((AbsoluteOrientationEvent event) {
+    motionSensors.absoluteOrientation!.listen((AbsoluteOrientationEvent event) {
     
      
 
@@ -72,9 +72,9 @@ class _MyAppState extends State<MyApp> {
       //  qLast.toQuanternion(event.yaw, event.pitch, event.roll);
 
     });
-    motionSensors.screenOrientation.listen((ScreenOrientationEvent event) {
+    motionSensors.screenOrientation!.listen((ScreenOrientationEvent event) {
       setState(() {
-        _screenOrientation = event.angle;
+        _screenOrientation = event.angle!;
       });
     });
   }
@@ -105,22 +105,22 @@ class _MyAppState extends State<MyApp> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Radio(
+                Radio<int>(
                   value: 1,
                   groupValue: _groupValue,
-                  onChanged: (value) => setUpdateInterval(value, Duration.microsecondsPerSecond ~/ 1),
+                  onChanged: (value) => setUpdateInterval(value!, Duration.microsecondsPerSecond ~/ 1),
                 ),
                 Text("1 FPS"),
-                Radio(
+                Radio<int>(
                   value: 2,
                   groupValue: _groupValue,
-                  onChanged: (value) => setUpdateInterval(value, Duration.microsecondsPerSecond ~/ 30),
+                  onChanged: (value) => setUpdateInterval(value!, Duration.microsecondsPerSecond ~/ 30),
                 ),
                 Text("30 FPS"),
-                Radio(
+                Radio<int>(
                   value: 3,
                   groupValue: _groupValue,
-                  onChanged: (value) => setUpdateInterval(value, Duration.microsecondsPerSecond ~/ 60),
+                  onChanged: (value) => setUpdateInterval(value!, Duration.microsecondsPerSecond ~/ 60),
                 ),
                 Text("60 FPS"),
               ],
