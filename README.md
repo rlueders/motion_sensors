@@ -35,7 +35,3 @@ Adding timestamp to absolute orientation
 Converting event timestamps to system time
 1.2.4
 Changing sensor type to TYPE_GEOMAGNETIC_ROTATION_VECTOR
-
-1.3.0
-Orientation now returns data from TYPE_GEOMAGNETIC_ROTATION_VECTOR sensor
-Absolute Orientation now returns data from TYPE_ROTATION_VECTOR sensor
