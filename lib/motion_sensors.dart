@@ -217,7 +217,7 @@ class MotionSensors {
   static const int TYPE_MAGNETIC_FIELD = 2;
   static const int TYPE_GYROSCOPE = 4;
   static const int TYPE_USER_ACCELEROMETER = 10;
-  static const int TYPE_ORIENTATION = 20; //=TYPE_GEOMAGNETIC_ROTATION_VECTOR
+  static const int TYPE_ORIENTATION = 15; //=TYPE_GAME_ROTATION_VECTOR
   static const int TYPE_ABSOLUTE_ORIENTATION = 11; //=TYPE_ROTATION_VECTOR
 
   /// Determines whether sensor is available.
